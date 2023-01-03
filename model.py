@@ -5,11 +5,10 @@ import torch.nn.functional as F
 import os
 
 class Linear_QNet(nn.Module):
-    
-    def __init__(self, input_size, hidden_size, outpt_size):
+    def __init__(self, input_size, hidden_size, output_size):
         super().__init__()
         self.linear1 = nn.Linear(input_size, hidden_size)
-        self.linear2 = nn.Linear(hidden_size, outpt_size)
+        self.linear2 = nn.Linear(hidden_size, output_size)
 
     def forward(self, x):
         x = F.relu(self.linear1(x))
@@ -24,10 +23,8 @@ class Linear_QNet(nn.Module):
         file_name = os.path.join(model_folder_path, file_name)
         torch.save(self.state_dict(), file_name)
 
-# training and optimization
 
 class QTrainer:
-    
     def __init__(self, model, lr, gamma):
         self.lr = lr
         self.gamma = gamma
@@ -40,7 +37,8 @@ class QTrainer:
         next_state = torch.tensor(next_state, dtype=torch.float)
         action = torch.tensor(action, dtype=torch.long)
         reward = torch.tensor(reward, dtype=torch.float)
-        # (n,x)
+        # (n, x)
+
         if len(state.shape) == 1:
             # (1, x)
             state = torch.unsqueeze(state, 0)
@@ -68,3 +66,4 @@ class QTrainer:
         loss.backward()
 
         self.optimizer.step()
+
