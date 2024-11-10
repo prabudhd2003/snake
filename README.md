@@ -1,6 +1,6 @@
 # Snake Game made by Prabudhd K Kandpal
 
-Results:
+**Results:**
 
 After 30 mins: Highest score - 65
 ![Screenshot from 2022-12-25 20-05-48](https://user-images.githubusercontent.com/96969241/210395287-34df7e71-d57a-4ebb-ab0f-2e718434e43f.png)
